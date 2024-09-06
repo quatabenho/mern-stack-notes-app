@@ -17,11 +17,16 @@ const PasswordInput = ({ value, onChange, placeholder}) => {
             className='w-full text-sm bg-transparent py-3 mr-3 rounded outline-none'
         />
 
+        {isShowPassword ? (
         <FaRegEye 
             size={22}
             onClick={toggleShowPassword}
-            className='text-blue-300 cursor-pointer'
-        />
+            className='text-blue-300 cursor-pointer' />
+        ) : (
+            <FaRegEyeSlash
+            size={22}
+            onClick={toggleShowPassword}
+            className='text-blue-300 cursor-pointer' />)}
     </div>
   )
 }
