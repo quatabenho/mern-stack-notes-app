@@ -87,6 +87,10 @@ app.post("/login", async(req, res) => {
 
 });
 
+app.post("/add-note", authenticateToken, async(req, res) => {
+    
+});
+
 
 app.listen(8000);
 
