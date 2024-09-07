@@ -80,6 +80,23 @@ const Home = () => {
     }
   }
 
+  const updateIsPinned = async (noteData) => {
+    const noteId = noteData._id
+    const isPinned = !noteData.isPinned
+    try {
+      const response = await axiosInstance.put('/update-note-pinned/' + noteId, {
+        isPinned
+      })
+
+      if(response.data && response.data.note){
+        showToastMessage('Note pinned successfully')
+        getAllNotes()
+      }
+    } catch (error) {
+      (error.response && error.response.data && error.response.data.message) ? showToastMessage(error.response.data.message) : showToastMessage('Something went wrong')
+    }
+  }
+
 
   React.useEffect(() => {
     getAllNotes()
@@ -107,7 +124,7 @@ const Home = () => {
               isPinned={item.isPinned}
               onEdit={() => handleEdit(item)}
               onDelete={() => deleteNote(item)}
-              onPinNote={() => {}}
+              onPinNote={() => updateIsPinned(item)}
             />
           ))}
             
