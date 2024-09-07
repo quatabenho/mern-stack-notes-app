@@ -1,8 +1,12 @@
 require('dotenv').config();
-
-const config = require('./config.json');
 const mongoose = require('mongoose');
-mongoose.connect(config.connectionString);
+
+try {
+    mongoose.connect(process.env.DATABASE_CONNECT_LINK);
+    console.log('Database connect successfully!')
+} catch (error) {
+    console.log('Database connect failure!')
+}
 
 const User = require('./models/user.model');
 const Note = require('./models/note.model');
