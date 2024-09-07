@@ -25,7 +25,7 @@ app.use(
 );
 
 app.get('/', (req, res) => {
-    res.json({ data: "hi"});
+    res.json({ data: "Mind Memos Application"});
 });
 
 app.post("/create-account", async(req, res) => {
@@ -241,11 +241,9 @@ app.put("/update-note-pinned/:noteId", authenticateToken, async(req, res) => {
 });
 
 
+const port = process.env.PORT || 8000;
 
-
-
-
-
-app.listen(8000);
+app.listen(port, 
+    ()=> console.log(`Website is running at http://localhost:${port}`))
 
 module.exports = app;
