@@ -72,7 +72,7 @@ const SignUp = () => {
             placeholder='Name' 
             className='input-box' 
             value={name} 
-            onChange={(e) => setName(e.target.value)} />
+            onChange={(e) => setName(e.target.value)} autoFocus/>
 
           <input 
             type="text" 

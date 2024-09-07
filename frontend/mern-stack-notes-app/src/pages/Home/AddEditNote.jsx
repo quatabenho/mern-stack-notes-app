@@ -11,6 +11,11 @@ const AddEditNote = ({noteData, type, getAllNotes, onClose, showToastMessage}) =
     const [tags, setTags] = React.useState(noteData?.tags || [])
     const [error, setError] = React.useState(null)
 
+    const handleKeyDown = (e) => {
+        if (e.key === 'Escape') {
+            onClose()
+        }
+    }
     const addNewNote = async () => {
         try {
             const response = await axiosInstance.post('/add-note', {
@@ -70,7 +75,7 @@ const AddEditNote = ({noteData, type, getAllNotes, onClose, showToastMessage}) =
     }
 
     return (
-        <div className='relative'>
+        <div className='relative' onKeyDown={handleKeyDown}>
 
             <button className='w-10 h-10 rounded-full flex items-center justify-center absolute -top-3 -right-3 hover:bg-slate-50' onClick={onClose}>
                 <MdClose className='text-xl text-slate-400' />
@@ -84,6 +89,7 @@ const AddEditNote = ({noteData, type, getAllNotes, onClose, showToastMessage}) =
                     className='text-2xl text-slate-950 outline-none'
                     value={title}
                     onChange={({target}) => setTitle(target.value)}
+                    autoFocus
                 />
             </div>
         
