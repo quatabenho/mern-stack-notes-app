@@ -65,6 +65,21 @@ const Home = () => {
     }
   }
 
+  const deleteNote = async (data) => {
+    const noteId = data._id
+    try {
+      const response = await axiosInstance.delete('/delete-note/' + noteId)
+
+      if(response.data && !response.data.error){
+        showToastMessage('Note deleted successfully', 'delete')
+        getAllNotes()
+      }
+    }
+    catch (error) {
+      (error.response && error.response.data && error.response.data.message) ? showToastMessage(error.response.data.message) : showToastMessage('Something went wrong')
+    }
+  }
+
 
   React.useEffect(() => {
     getAllNotes()
@@ -91,7 +106,7 @@ const Home = () => {
               tags={item.tags}
               isPinned={item.isPinned}
               onEdit={() => handleEdit(item)}
-              onDelete={() => {}}
+              onDelete={() => deleteNote(item)}
               onPinNote={() => {}}
             />
           ))}
