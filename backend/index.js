@@ -87,6 +87,21 @@ app.post("/login", async(req, res) => {
 
 });
 
+app.get("/get-user", authenticateToken, async(req, res) => {
+    const { user } = req.user;
+
+    const isUser = await User.findOne({ _id: user._id });
+
+    if(!user) {
+        return res.status(400).json({ message: "Invalid request"});
+    }
+    return res.json({
+        error: false,
+        user:{ fullName: isUser.fullName, email: isUser.email, _id: isUser._id, createOn: isUser.createOn },
+        message: "User fetched successfully",
+    });
+});
+
 app.post("/add-note", authenticateToken, async(req, res) => {
     const { title, content, tags} = req.body;
     const { user } = req.user;
@@ -220,6 +235,8 @@ app.put("/update-note-pinned/:noteId", authenticateToken, async(req, res) => {
             message: "Internal server error"});
     }
 });
+
+
 
 
 
