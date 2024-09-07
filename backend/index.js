@@ -193,6 +193,38 @@ app.delete("/delete-note/:noteId", authenticateToken, async(req, res) => {
             message: "Internal server error"});
     }
 });
+
+app.put("/update-note-pinned/:noteId", authenticateToken, async(req, res) => {
+    const noteId = req.params.noteId;
+    const { isPinned } = req.body;
+    const { user } = req.user;
+
+    try {
+        const note = await Note.findOne({ _id: noteId, userId: user._id });
+        if(!note) {
+            return res.status(404).json({ message: "Note not found"});
+        }
+
+        note.isPinned = isPinned;
+
+        await note.save();
+
+        return res.json({
+            error: false,
+            note,
+            message: "Note pinned status updated successfully",
+        });
+    } catch (error) {
+        return res.status(500).json({ 
+            error: true,
+            message: "Internal server error"});
+    }
+});
+
+
+
+
+
 app.listen(8000);
 
 module.exports = app;
