@@ -99,7 +99,8 @@ const AddEditNote = ({noteData, type, getAllNotes, onClose, showToastMessage}) =
                     type='text'
                     placeholder='Content'
                     className='text-sm text-slate-950 outline-none bg-slate-50 p-2 rounded'
-                    row={10}
+                    style={{height: '400px'}}
+                    row={50}
                     value={content}
                     onChange={({target}) => setContent(target.value)}
                 />
