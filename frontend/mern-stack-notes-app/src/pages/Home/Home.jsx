@@ -9,6 +9,7 @@ import axiosInstance from '../../utils/axiosInstance'
 import ToastMessage from '../../components/ToastMessage/ToastMessage'
 import EmptyCard from '../../components/EmptyCard/EmptyCard'
 import AddNotesImg from '../../../src/assets/addnote.svg'
+import hellen from '../../../src/assets/hellen.jpg'
 const Home = () => {
 
   const [openAddEditModal, setOpenAddEditModal] = React.useState({
@@ -136,6 +137,7 @@ const Home = () => {
             imgSrc={AddNotesImg}
             message={`Start creating your first note!`}/>)}
         </div>
+        <img src={hellen} alt='Add Notes' className='w-1/2 mx-auto mt-10' />
 
         <button className='w-16 h-16 flex items-center justify-center rounded-2xl bg-primary hover:bg-blue-600 absolute right-10 bottom-10'
          onClick={() => {
